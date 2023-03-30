@@ -1,4 +1,4 @@
-#include "pawms/knight.hpp"
+#include "pawns/knight.hpp"
 
 Knight::Knight ( Color set_color ) {
     color = set_color;
