@@ -13,4 +13,4 @@ add_executable(Chees
         src/pawns/fool.cpp
         src/board/board.cpp
         src/board/board.h
-        )
+        src/pawns/king.hpp src/pawns/knight.hpp src/pawns/queen.hpp src/pawns/rook.hpp)

@@ -1,4 +1,6 @@
-#pragma once 
+#pragma once
+#include "pawns/IPiece.hpp"
+
 
 class King : public IPiece {
     public:
