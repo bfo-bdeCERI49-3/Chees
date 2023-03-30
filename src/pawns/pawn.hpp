@@ -1,9 +1,16 @@
 #pragma once 
 
-class Pawn : Piece {
+#include "pawns/IPiece.hpp"
+
+class Pawn : public IPiece {
     public:
-        inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
-        inline void taken() { this->taken = true; };        // Set the piece as taken
-        
-        int move();                                         // To override in each piece class
-}
+        Pawn ( Color );
+        ~Pawn();
+
+        int move( Board& );                                        // To override in each piece class
+    private: 
+        bool first_move { true };
+
+        const int allowedMoves[2] = { 8, 16 };
+        int possibleMoves[4];                                    // En Passant, First move;
+};

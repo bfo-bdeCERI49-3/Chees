@@ -1,6 +1,11 @@
 #pragma once 
-#include "Piece.h"
+#include "pawns/IPiece.hpp"
 
-class Fool : Piece {
-    
-}
+class Fool : public IPiece  {
+    public:
+        Fool(Color);
+        ~Fool();
+
+        int move(Board&);                                       // To override in each piece class
+    private:
+};

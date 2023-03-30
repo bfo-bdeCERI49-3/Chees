@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../board/board.h"
+
 // Color Enumeration
 enum Color {
     Black = 0,
@@ -16,4 +18,5 @@ class IPiece {
     private:
         Color   color;                   // Color of the piece
         bool    isPieceTaken { false };  // True the piece was taken
+        int position;
 };

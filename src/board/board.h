@@ -2,14 +2,19 @@
 // Created by Notoverflow on 3/30/23.
 //
 
-#ifndef CHEES_BOARD_H
-#define CHEES_BOARD_H
 
 
-class board {
 
+#pragma once
+#include "pawns/IPiece.hpp"
 
+struct Case {
+    IPiece* m_pawn { nullptr };
+    PieceType type { NOTHING };
 };
 
-
-#endif //CHEES_BOARD_H
+class Board {
+    public:
+        Board();
+        Case* cases;
+};

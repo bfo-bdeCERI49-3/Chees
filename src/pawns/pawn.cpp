@@ -1,6 +1,7 @@
 #include "pawns/pawn.hpp"
+#include "board/board.h"
 
-
-Pawn::Pawn() {
-    
+int Pawn::move( Board& m_board ){
+    int new_pos;
+    return new_pos;
 }
