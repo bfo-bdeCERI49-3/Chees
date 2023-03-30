@@ -3,16 +3,7 @@
 //
 
 #pragma once
-
-enum PieceType {
-    NOTHING = 0,
-    QUEEN,
-    FOOL,
-    ROOK,
-    KNIGHT,
-    PAWN,
-    KING,
-};
+#include "pawns/IPiece.h"
 
 struct Case {
     IPiece* m_pawn { nullptr };
@@ -21,7 +12,6 @@ struct Case {
 
 class Board {
     public:
-
-    private: 
-        Case* cases; 
+        Board();
+        Case* cases;
 };

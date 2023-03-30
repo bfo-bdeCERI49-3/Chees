@@ -2,5 +2,5 @@
 
 class King : public IPiece {
     public:
-        int move();                                         // To override in each piece class
+        int move(Board&);                                        // To override in each piece class
 };

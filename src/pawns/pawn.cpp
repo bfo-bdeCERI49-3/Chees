@@ -1,19 +1,7 @@
 #include "pawns/pawn.hpp"
+#include "board/board.h"
 
 int Pawn::move(Board m_board){
-    if ( color == Color::White ) {
-        if ( first_move ) {
-            
-        } else {
-            board.cases[]
-        }
-    } else {
-        if ( first_move ) {
-            
-        } else {
-
-        }
-    }
-
-    return 0;
+    int new_pos = position;
+    return new_pos;
 }
