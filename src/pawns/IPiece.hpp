@@ -23,8 +23,8 @@ enum PieceType {
 
 class IPiece {
     public:
-        // Color, PieceType, size_t size of our array moves;
-        IPiece(Color, PieceType, size_t);
+        // Color, size_t size of our array moves;
+        IPiece(Color, size_t);
 
         inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
 

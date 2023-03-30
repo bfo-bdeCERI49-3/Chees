@@ -13,4 +13,4 @@ add_executable(Chees
         src/pawns/fool.cpp
         src/board/board.cpp
         src/board/board.h
-)
+        )

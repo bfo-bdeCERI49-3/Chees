@@ -3,10 +3,9 @@
 
 class Fool : public IPiece  {
     public:
-        Fool ();
+        Fool(Color color, PieceType type, size_t size, int *allowedMoves, int *possibleMoves);
 
-        int move( Board& );                                        // To override in each piece class
-        void checkMoves( Board& );
+    int move(Board&);                                       // To override in each piece class
     private: 
         const int allowedMoves[4] = { 7, 9, -7, -9};            // Possible diagonals move
         int  possibleMoves[16];
