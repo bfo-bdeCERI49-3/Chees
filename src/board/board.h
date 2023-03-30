@@ -2,14 +2,26 @@
 // Created by Notoverflow on 3/30/23.
 //
 
-#ifndef CHEES_BOARD_H
-#define CHEES_BOARD_H
+#pragma once
 
-
-class board {
-
-
+enum PieceType {
+    NOTHING = 0,
+    QUEEN,
+    FOOL,
+    ROOK,
+    KNIGHT,
+    PAWN,
+    KING,
 };
 
+struct Case {
+    IPiece* m_pawn { nullptr };
+    PieceType type { NOTHING };
+};
 
-#endif //CHEES_BOARD_H
+class Board {
+    public:
+
+    private: 
+        Case* cases; 
+};
