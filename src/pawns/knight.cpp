@@ -12,6 +12,10 @@ void Knight::checkMoves(Board& m_board) {
     for ( int i = 0; i < 8; i++ ) {
         int next_pos = position + allowedMoves[i];
         if (next_pos >= 0 && next_pos <= 63 ) {
+            if ( (next_pos + 1) % 8 == 0 || next_pos % 8 == 0) {
+                continue;
+            }
+
             if ( m_board.cases[next_pos].type == NOTHING ) {
                 possibleMoves[allow_i] = next_pos;
                 allow_i++;
