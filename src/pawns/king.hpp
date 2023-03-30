@@ -1,9 +1,13 @@
-#pragma once 
+#pragma once
+#include "IPiece.h"
 
-class King : Piece {
+class King : IPiece {
     public:
-        inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
-        inline void taken() { this->taken = true; };        // Set the piece as taken
-        
-        int move();                                         // To override in each piece class
-}
+        int move();             // To override in each piece class
+        void checkMoves(board &board);
+
+
+    private:
+        const int allowedMoves[8] = { 1, -1, 8, -8, 7, -7, 9, -9 };     // Allowed moves as King
+        int possibleMoves[8];                                           // 
+};

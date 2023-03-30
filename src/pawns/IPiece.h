@@ -9,12 +9,11 @@ enum Color {
 // Base Piece
 class IPiece {
     public:
-        inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
-        inline void taken() { this->taken = true; };        // Set the piece as taken
-        
-        int move();                                         // To override in each piece class
+        inline bool isTaken()   { return this->isPieceTaken; };         // Check if the piece was taken or not 
+        inline void taken()     { this->isPieceTaken = true; };         // Set the piece as taken
+        int move();                                                     // To override in each piece class
 
     private:
-        Color   color { NULL };     // Color of the piece
-        bool    taken { false };    // True the piece was taken
+        Color   color;                   // Color of the piece
+        bool    isPieceTaken { false };  // True the piece was taken
 };
