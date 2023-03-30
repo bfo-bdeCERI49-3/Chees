@@ -16,5 +16,5 @@ struct Case {
 class Board {
     public:
         Board();
-        Case* cases[64];
+        Case* cases;
 };

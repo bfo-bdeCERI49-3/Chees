@@ -4,7 +4,7 @@
 
 class Pawn : public IPiece {
     public:
-        Pawn ( Color );
+        Pawn ( Color, size_t );
         ~Pawn();
 
         int move( Board& );                                        // To override in each piece class
