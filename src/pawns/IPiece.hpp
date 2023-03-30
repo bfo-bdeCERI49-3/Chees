@@ -23,9 +23,6 @@ enum PieceType {
 
 class IPiece {
     public:
-        // Color, size_t size of our array moves;
-        IPiece(Color, size_t);
-
         inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
 
         inline void setTaken() { this->taken = true; };        // Set the piece as taken
@@ -37,10 +34,11 @@ class IPiece {
         Color   color { White };        // Color of the piece
         bool    taken { false };        // True the piece was taken
 
-        int* allowed_moves { nullptr }; // Should set-up at constructor 
-        size_t allowed_moves_size { 0 };
-
-        int* possibleMoves { nullptr };
+        // Should set-up at child constructor 
+        int* allowed_moves { nullptr };
+        int* possible_moves { nullptr };
+        const size_t allowed_moves_size { 0 };
+        size_t possible_move_size { 0 };
 
         int  position;
 };
