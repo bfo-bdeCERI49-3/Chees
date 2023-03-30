@@ -1,11 +1,11 @@
 #pragma once 
 
-#include "pawns/IPiece.h"
+#include "pawns/IPiece.hpp"
 
 class Pawn : public IPiece {
     public:
-        int move(Board&);                                        // To override in each piece class
-        void checkMoves(Board&);
+        int move( Board& );                                        // To override in each piece class
+        void checkMoves( Board& );
 
     private: 
         bool first_move { true };

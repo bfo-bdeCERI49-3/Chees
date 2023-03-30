@@ -1,4 +1,5 @@
 #pragma once 
+#include "pawns/IPiece.hpp"
 
 class Rook : public IPiece {
     public:

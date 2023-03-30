@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "pawns/IPiece.h"
+#include "pawns/IPiece.hpp"
 
 struct Case {
     IPiece* m_pawn { nullptr };

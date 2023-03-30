@@ -8,6 +8,7 @@ include_directories(.)
 include_directories(./src/)
 
 add_executable(Chees
+        src/pawns/IPiece.cpp
         src/pawns/pawn.cpp
         src/pawns/fool.cpp
         src/board/board.cpp
