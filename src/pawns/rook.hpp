@@ -3,10 +3,12 @@
 
 class Rook : public IPiece {
     public:
-        Rook( Color );
+        Rook( Color, size_t );
         ~Rook();
 
         int move(Board&);                                   // To override in each piece class
+        void checkMoves(Board&);
     private:
-        int possibleMoves[14];                              // En Passant, First move;
+        const int allowedMoves[14] = {1, 2, 3, 4, 5, 6, 7, 8, 16, 24, 32, 40, 48, 56};
+        int possibleMoves[16];
 };

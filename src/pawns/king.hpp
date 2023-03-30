@@ -4,8 +4,8 @@
 
 class King : public IPiece {
     public:
-        King ( Color );
+        King ( Color, size_t );
         ~King();
-        
+
         int move(Board&);                                        // To override in each piece class
 };
