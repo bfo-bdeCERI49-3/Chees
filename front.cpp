@@ -9,7 +9,7 @@
 
 void front::doInput() {
     SDL_Event event;
-    int mouseX = 0, mouseY = 0;
+    int mouseX = -1, mouseY = -1;
 
     while (SDL_PollEvent(&event)){
         switch (event.type){
@@ -18,7 +18,7 @@ void front::doInput() {
                 break;
             case SDL_MOUSEBUTTONDOWN: {
                 SDL_GetMouseState(&mouseX, &mouseY);
-                if ( mouseX >= 10 && mouseX <= 1040 && mouseY >= 0 && mouseY <=  1040 ) {
+                if ( mouseX >= 10 && mouseX <= 1040 && mouseY >= 10 && mouseY <=  1040 ) {
 
                     int m_j = (mouseY / 130 );
                     int m_i = (mouseX / 130) ;
