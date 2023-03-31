@@ -4,8 +4,7 @@
 
 class Queen : public IPiece {
     public:
-        Queen ( Color, size_t );
-
+    Queen ( Color, size_t );
     Queen();
 
     ~Queen();
