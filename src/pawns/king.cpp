@@ -12,8 +12,8 @@ int King::move(Board &m_board)
 {
 }
 
-bool King::isPossibleMove( int new_position ) {
-    checkMoves();
+bool King::isPossibleMoves( Board& m_board,  int new_position ) {
+    checkMoves(m_board);
     for ( int i = 0; i < 8; i++){
         if ( possibleMoves[i] == new_position ) { 
             return true;

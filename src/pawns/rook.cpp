@@ -2,14 +2,15 @@
 #include "board/board.h"
 #include <iostream>
 
+
 Rook::Rook(Color set_color, size_t set_position)
 {
     color = set_color;
     position = set_position;
 }
 
-bool Pawn::isPossibleMove( int new_position ) {
-    checkMoves();
+bool Rook::isPossibleMove( Board& m_board, int new_position ) {
+    checkMoves(m_board);
     for ( int i = 0; i < 16; i++){
         if ( possibleMoves[i] == new_position ) { 
             return true;

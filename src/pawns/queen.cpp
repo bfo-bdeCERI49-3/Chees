@@ -12,8 +12,8 @@ int Queen::move(Board &m_board)
     return new_pos;
 }
 
-bool Pawn::isPossibleMove( int new_position ) {
-    checkMoves();
+bool Queen::isPossibleMoves( Board& m_board,  int new_position ) {
+    checkMoves(m_board);
     for ( int i = 0; i < 30; i++){
         if ( possibleMoves[i] == new_position ) { 
             return true;

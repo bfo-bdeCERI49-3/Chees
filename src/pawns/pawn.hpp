@@ -10,8 +10,9 @@ class Pawn : public IPiece {
         int move( Board& );                                        // To override in each piece class
         void checkMoves( Board& );
 
-        bool isPossibleMove( int );
-    private: 
+        bool isPossibleMoves( Board&, int );
+
+    private:
         bool first_move { true };
 
         const int allowedMoves[4] = { 7, 8, 9, 16 };
