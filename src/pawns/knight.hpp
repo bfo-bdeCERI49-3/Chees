@@ -13,6 +13,6 @@ class Knight : public IPiece {
         bool isPossibleMoves( Board&, int );
 
     private:
-        const int allowedMoves[8] = { -10, 6, 15, 17, 10, 6, -15, -17};
+        const int allowedMoves[8] = { -10, 6, 15, 17, 10, -6, -15, -17};
         int possibleMoves[8];
 };

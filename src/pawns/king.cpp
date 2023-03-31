@@ -15,6 +15,8 @@ int King::move( Board& m_board, int old_pos, int new_pos){
 
     m_board.cases[old_pos].m_pawn = nullptr;
     m_board.cases[old_pos].type = NOTHING;
+
+    position = new_pos;
 }
 
 bool King::isPossibleMoves( Board& m_board,  int new_position ) {

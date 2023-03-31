@@ -13,6 +13,8 @@ int Queen::move( Board& m_board, int old_pos, int new_pos){
 
     m_board.cases[old_pos].m_pawn = nullptr;
     m_board.cases[old_pos].type = NOTHING;
+    position = new_pos;
+
 }
 
 bool Queen::isPossibleMoves( Board& m_board,  int new_position ) {
@@ -27,520 +29,73 @@ bool Queen::isPossibleMoves( Board& m_board,  int new_position ) {
 
 void Queen::checkMoves(Board &m_board)
 {
-    int movesSize = 0;
-    if (this->color == White)
+    int allow_i = 0;
+    for ( int i = 0; i < 4; i++ ) {
+        int next_pos = position;
+        while ( next_pos + allowedMovesBishop[i] >= 0 && next_pos  + allowedMovesBishop[i] < 64) {
+
+            Case current_case = m_board.cases[next_pos  + allowedMovesBishop[i]];
+            if(current_case.type != NOTHING) {
+                if ( current_case.m_pawn != nullptr ) {
+                    if ( color !=  current_case.m_pawn->getColor() ) {
+                        possibleMoves[allow_i] = next_pos + allowedMovesBishop[i];
+                    }
+                }
+                break;
+            }
+            possibleMoves[allow_i] = next_pos + allowedMovesBishop[i];
+            next_pos += allowedMovesBishop[i];
+            allow_i++;
+        }
+    }
+
+    bool vertical = true;
+    bool horizontal = true;
+
+    for (int i = 0; i < 14; i++)
     {
-        // Right side of the checker
-        if (this->position % 8 == 0)
+        int next_pos = position + allowedMovesRook[i];
+
+        if (vertical && next_pos >= 0 && next_pos <= 63)
         {
-            // Generate horizontal moves
-            for (int i = 1; i < 8; i++)
+            if (m_board.cases[next_pos].type == NOTHING)
             {
-
-                Case nextPosition = m_board.cases[this->position + i];
-
-                // Nothing in front
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] == i;
-                    movesSize++;
-                }
-
-                // Black pawn in front
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] == i;
-                    movesSize++;
-                    break;
-                    // White pawn in front
-                }
-                else if (nextPosition.m_pawn->getColor() == White)
-                {
-                    break;
-                }
-
-                // arrived at the right side: exit loop
-                if (this->position + i % 7 == 0)
-                    break;
+                possibleMoves[allow_i] = next_pos;
+                allow_i++;
             }
-
-            // generate veritcal moves
-            for (int i = 1; i < 8; i++)
+            else
             {
-                // Check for overflow
-                if (this->position + 8 * i < 63)
-                {
-                    Case nextPosition = m_board.cases[this->position + 8 * i];
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 8 * i;
-                        movesSize++;
-                        break;
-                        // White piece on the way as white
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White)
-                    {
-                        break;
-                    };
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 8 * i;
-                        movesSize++;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position - 8 * i > 0)
-                {
-                    Case nextPosition = m_board.cases[this->position - 8 * i];
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 8 * i;
-                        movesSize++;
-                    }
-
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 8 * i;
-                        movesSize++;
-                        // White as white -> break loop and stop looking for moves
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White && this->position + 8 * i != this->position)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            // Diagonal
-            for (int i = 1; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position + 9 * i <= 63)
-                {
-                    Case nextPosition = m_board.cases[this->position + 9 * i];
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 9 * i;
-                        movesSize++;
-                        break;
-                        // White piece on the way as white
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White)
-                    {
-                        break;
-                    };
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 9 * i;
-                        movesSize++;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position - 9 * i >= 0)
-                {
-                    Case nextPosition = m_board.cases[this->position - 9 * i];
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 9 * i;
-                        movesSize++;
-                    }
-
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 9 * i;
-                        movesSize++;
-                        // White as white -> break loop and stop looking for moves
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White && this->position != this->position - 9 * i)
-                    {
-                        break;
-                    }
-                }
+                vertical = false;
             }
         }
 
-        if (this->position % 7 == 0)
+        next_pos = position - allowedMovesRook[i];
+        if (horizontal && next_pos >= 0 && next_pos <= 63)
         {
-            // Horizontal moves
-            for (int i = 1; i < 8; i++)
+            if (m_board.cases[next_pos].type == NOTHING)
             {
-                Case nextPosition = m_board.cases[this->position - i];
-
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] = this->position - i;
-                    movesSize++;
-                }
-
-                // Black piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] = this->position - i;
-                    movesSize++;
-                    break;
-                }
-
-                // White piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == White)
-                {
-                    break;
-                }
-
-                if (this->position - i % 8 == 0)
-                    break;
+                possibleMoves[allow_i] = next_pos;
+                allow_i++;
             }
-            // generate veritcal moves
-            for (int i = 1; i < 8; i++)
+            else
             {
-                // Check for overflow
-                if (this->position + 8 * i < 63)
-                {
-                    Case nextPosition = m_board.cases[this->position + 8 * i];
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 8 * i;
-                        movesSize++;
-                        break;
-                        // White piece on the way as white
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White)
-                    {
-                        break;
-                    };
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 8 * i;
-                        movesSize++;
-                    }
-                }
+                horizontal = false;
             }
-            for (int i = 0; i < 8; i++)
+            if (this->color == White)
             {
-                // Check for overflow
-                if (this->position - 8 * i > 0)
+
+                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == Black)
                 {
-                    Case nextPosition = m_board.cases[this->position - 8 * i];
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 8 * i;
-                        movesSize++;
-                    }
-
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 8 * i;
-                        movesSize++;
-                        // White as white -> break loop and stop looking for moves
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White && this->position + 8 * i != this->position)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            // Horizontal
-            for (int i = 1; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position + 9 * i <= 63)
-                {
-                    Case nextPosition = m_board.cases[this->position + 9 * i];
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 9 * i;
-                        movesSize++;
-                        break;
-                        // White piece on the way as white
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White)
-                    {
-                        break;
-                    };
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 9 * i;
-                        movesSize++;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position - 9 * i >= 0)
-                {
-                    Case nextPosition = m_board.cases[this->position - 9 * i];
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 9 * i;
-                        movesSize++;
-                    }
-
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 9 * i;
-                        movesSize++;
-                        // White as white -> break loop and stop looking for moves
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White && this->position != this->position - 9 * i)
-                    {
-                        break;
-                    }
-                }
-            }
-            // Diagonal
-            for (int i = 1; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position + 7 * i <= 63)
-                {
-                    Case nextPosition = m_board.cases[this->position + 7 * i];
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 7 * i;
-                        movesSize++;
-                        break;
-                        // White piece on the way as white
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White)
-                    {
-                        break;
-                    };
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position + 7 * i;
-                        movesSize++;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                // Check for overflow
-                if (this->position - 7 * i >= 0)
-                {
-                    Case nextPosition = m_board.cases[this->position - 7 * i];
-
-                    // Nothing on the way
-                    if (nextPosition.type == NOTHING)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 7 * i;
-                        movesSize++;
-                    }
-
-                    // Black piece on the way as a white piece
-                    if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                    {
-                        this->possibleMoves[movesSize] = this->position - 7 * i;
-                        movesSize++;
-                        // White as white -> break loop and stop looking for moves
-                    }
-                    else if (nextPosition.m_pawn->getColor() == White && this->position != this->position - 7 * i)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Diagonal
-        for (int i = 1; i < 8; i++)
-        {
-            // Check for overflow
-            if (this->position + 7 * i <= 63)
-            {
-                Case nextPosition = m_board.cases[this->position + 7 * i];
-                // Black piece on the way as a white piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] = this->position + 7 * i;
-                    movesSize++;
-                    break;
-                    // White piece on the way as white
-                }
-                else if (nextPosition.m_pawn->getColor() == White)
-                {
-                    break;
-                };
-
-                // Nothing on the way
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] = this->position + 7 * i;
-                    movesSize++;
-                }
-            }
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            // Check for overflow
-            if (this->position - 7 * i >= 0)
-            {
-                Case nextPosition = m_board.cases[this->position - 7 * i];
-
-                // Nothing on the way
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] = this->position - 7 * i;
-                    movesSize++;
-                }
-
-                // Black piece on the way as a white piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] = this->position - 7 * i;
-                    movesSize++;
-                    // White as white -> break loop and stop looking for moves
-                }
-                else if (nextPosition.m_pawn->getColor() == White && this->position != this->position - 7 * i)
-                {
+                    possibleMoves[allow_i] = next_pos;
+                    allow_i++;
                     break;
                 }
             }
-        }
-        // Horizontal
-        for (int i = 1; i < 8; i++)
-        {
-            // Check for overflow
-            if (this->position + 9 * i <= 63)
+            else
             {
-                Case nextPosition = m_board.cases[this->position + 9 * i];
-                // Black piece on the way as a white piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] = this->position + 9 * i;
-                    movesSize++;
+                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == White)
                     break;
-                    // White piece on the way as white
-                }
-                else if (nextPosition.m_pawn->getColor() == White)
-                {
-                    break;
-                };
-
-                // Nothing on the way
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] = this->position + 9 * i;
-                    movesSize++;
-                }
             }
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            // Check for overflow
-            if (this->position - 9 * i >= 0)
-            {
-                Case nextPosition = m_board.cases[this->position - 9 * i];
-
-                // Nothing on the way
-                if (nextPosition.type == NOTHING)
-                {
-                    this->possibleMoves[movesSize] = this->position - 9 * i;
-                    movesSize++;
-                }
-
-                // Black piece on the way as a white piece
-                if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-                {
-                    this->possibleMoves[movesSize] = this->position - 9 * i;
-                    movesSize++;
-                    // White as white -> break loop and stop looking for moves
-                }
-                else if (nextPosition.m_pawn->getColor() == White && this->position != this->position - 9 * i)
-                {
-                    break;
-                }
-            }
-        }
-        // Horizontal moves
-        for (int i = 1; i < 8; i++)
-        {
-            Case nextPosition = m_board.cases[this->position - i];
-
-            if (nextPosition.type == NOTHING)
-            {
-                this->possibleMoves[movesSize] = this->position - i;
-                movesSize++;
-            }
-
-            // Black piece
-            if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-            {
-                this->possibleMoves[movesSize] = this->position - i;
-                movesSize++;
-                break;
-            }
-
-            // White piece
-            if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == White)
-            {
-                break;
-            }
-
-            if (this->position - i % 8 == 0)
-                break;
-        }
-        for (int i = 1; i < 8; i++)
-        {
-
-            Case nextPosition = m_board.cases[this->position + i];
-
-            // Nothing in front
-            if (nextPosition.type == NOTHING)
-            {
-                this->possibleMoves[movesSize] == i;
-                movesSize++;
-            }
-
-            // Black pawn in front
-            if (nextPosition.type != NOTHING && nextPosition.m_pawn->getColor() == Black)
-            {
-                this->possibleMoves[movesSize] == i;
-                movesSize++;
-                break;
-                // White pawn in front
-            }
-            else if (nextPosition.m_pawn->getColor() == White)
-            {
-                break;
-            }
-
-            // arrived at the right side: exit loop
-            if (this->position + i % 7 == 0)
-                break;
         }
     }
 }

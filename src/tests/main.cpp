@@ -8,9 +8,11 @@ int main(){
     front app;
 
     while(!app.is_finish()) {
-        app.clear();
+
         app.doInput();
         app.render();
+        app.clear();
+        SDL_Delay(16);
     }
 
     return 0;

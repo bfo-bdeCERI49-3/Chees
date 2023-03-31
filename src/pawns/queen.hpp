@@ -15,7 +15,8 @@ class Queen : public IPiece {
         bool isPossibleMoves( Board&, int );
 
 private:
-        const int allowedMoves[30] = { -1, 1, -7, 7, 8, -8, -9, 9, };
+        const int allowedMovesBishop[4] = {-9, -7, 9, 7};
+        const int allowedMovesRook[14] = {1, 2, 3, 4, 5, 6, 7, 8, 16, 24, 32, 40, 48, 56};
         int possibleMoves[30];
         bool first_move { true };
 };

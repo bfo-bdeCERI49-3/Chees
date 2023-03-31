@@ -6,7 +6,8 @@ class Board;
 // Color Enumeration
 enum Color {
     Black = 0,
-    White
+    White,
+    None,
 };
 
 enum PieceType {
@@ -33,7 +34,7 @@ class IPiece {
 
 
     protected:
-        Color   color { White };        // Color of the piece
+        Color   color { None };        // Color of the piece
         bool    taken { false };        // True the piece was taken
         int  position;
 };

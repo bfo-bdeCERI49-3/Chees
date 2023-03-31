@@ -60,21 +60,6 @@ void Rook::checkMoves(Board &m_board)
             {
                 horizontal = false;
             }
-            if (this->color == White)
-            {
-
-                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == Black)
-                {
-                    possibleMoves[allow_i] = next_pos;
-                    allow_i++;
-                    break;
-                }
-            }
-            else
-            {
-                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == White)
-                    break;
-            }
         }
     }
 
@@ -92,4 +77,6 @@ int Rook::move( Board& m_board, int old_pos, int new_pos){
 
     m_board.cases[old_pos].m_pawn = nullptr;
     m_board.cases[old_pos].type = NOTHING;
+
+    position = new_pos;
 }

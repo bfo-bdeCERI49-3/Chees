@@ -28,9 +28,14 @@ void front::doInput() {
                     if ( current_pos == -1 && m_board.cases[i].type != NOTHING) {
                         current_pos = i;
                     } else if ( current_pos != -1 ) {
-                        if ( current_pos != i) {
+                        if ( current_pos != i && player == m_board.cases[current_pos].m_pawn->getColor()) {
                             if (m_board.cases[current_pos].m_pawn->isPossibleMoves(m_board, i)) {
                                 m_board.cases[current_pos].m_pawn->move(m_board, current_pos, i);
+                                if ( player == White) {
+                                    player = Black;
+                                } else if ( player == Black){
+                                    player = White;
+                                }
                             }
                         }
                         current_pos = -1;
@@ -63,7 +68,7 @@ void front::render() {
             x = 0;
         }
 
-        if (  m_board.cases[i].type != NOTHING && m_board.cases[i].m_pawn->getColor() == Black){
+        if (  m_board.cases[i].type != NOTHING && m_board.cases[i].m_pawn->getColor() == White){
             wb = 6;
         }
 
