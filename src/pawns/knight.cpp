@@ -75,14 +75,3 @@ void Knight::checkMoves(Board &m_board)
     }
     std::cout << "\n";
 }
-
-int Knight::move(Board &m_board, int pos, int new_pos)
-{
-    m_board.cases[new_pos].m_pawn = m_board.cases[old_pos].m_pawn;
-    m_board.cases[new_pos].type = m_board.cases[old_pos].type;
-
-
-    m_board.cases[old_pos].m_pawn = nullptr;
-    m_board.cases[old_pos].type = NOTHING;
-
-}

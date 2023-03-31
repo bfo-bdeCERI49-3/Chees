@@ -26,11 +26,6 @@ bool Pawn::isPossibleMoves( Board& m_board, int new_position ) {
     return false;
 }
 
-int Pawn::move(Board &m_board)
-{
-    int new_pos;
-    return new_pos;
-}
 
 void Pawn::checkMoves(Board &m_board)
 {

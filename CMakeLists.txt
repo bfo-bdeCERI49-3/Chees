@@ -13,7 +13,7 @@ pkg_check_modules(SDL_IMAGE REQUIRED SDL2_image)
 
 add_executable(Chees
         src/pawns/pawn.cpp
-        src/pawns/fool.cpp
+        src/pawns/bishop.cpp
         src/pawns/rook.cpp
         src/pawns/king.cpp
         src/pawns/queen.cpp

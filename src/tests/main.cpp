@@ -1,6 +1,5 @@
 #include "board/board.h"
 #include "pawns/knight.hpp"
-#include "pawns/fool.hpp"
 #include "pawns/rook.hpp"
 #include "pawns/pawn.hpp"
 #include "front.h"
