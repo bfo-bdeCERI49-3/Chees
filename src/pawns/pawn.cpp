@@ -15,7 +15,7 @@ int Pawn::move(Board &m_board)
 
 void Pawn::checkMoves(Board &m_board)
 {
-    if (this->getColor() == White)
+    if (this->color == White)
     {
         if (this->first_move)
         {
@@ -25,7 +25,7 @@ void Pawn::checkMoves(Board &m_board)
                 this->possibleMovesSize++;
             }
         }
-        if (this->position + 8 < 64) {
+        if (this->position + 8 <= 64) {
             if (m_board.cases[this->position + 8].type == NOTHING)
             {
 
@@ -52,7 +52,7 @@ void Pawn::checkMoves(Board &m_board)
             }
         }
     }
-    else
+    else if(this->color == Black)
     {
         if (this->first_move)
         {
@@ -62,8 +62,8 @@ void Pawn::checkMoves(Board &m_board)
                 this->possibleMovesSize++;
             }
         }
-        if (this->position - 8 > 0) {
-            if (m_board.cases[this->position -8].type == NOTHING)
+        if (this->position - 8 >= 0) {
+            if (m_board.cases[this->position - 8].type == NOTHING)
             {
                 this->possibleMoves[this->possibleMovesSize] = this->position - 8;
                 this->possibleMovesSize++;
