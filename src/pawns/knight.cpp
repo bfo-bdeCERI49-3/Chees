@@ -51,8 +51,6 @@ void Knight::checkMoves(Board &m_board)
                 {
                     if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == White)
                     {
-                        possibleMoves[allow_i] = next_pos;
-                        allow_i++;
                         break;
                     }
                 }
