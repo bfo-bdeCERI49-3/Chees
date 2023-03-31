@@ -29,15 +29,12 @@ void front::doInput() {
                         current_pos = i;
                     } else if ( current_pos != -1 ) {
                         if ( current_pos != i) {
-                            m_board.cases[i].type = m_board.cases[current_pos].type;
-                            m_board.cases[i].m_pawn = m_board.cases[current_pos].m_pawn;
-
-                            m_board.cases[current_pos].type = NOTHING;
-                            m_board.cases[current_pos].m_pawn = nullptr;
+                            if (m_board.cases[current_pos].m_pawn->isPossibleMoves(m_board, i)) {
+                                m_board.cases[current_pos].m_pawn->move(m_board, current_pos, i);
+                            }
                         }
                         current_pos = -1;
                     }
-
                 }
                 }
                 break;
@@ -107,9 +104,7 @@ void front::clear() {
     SDL_RenderClear(renderer);
 }
 
-front::~front() {
-
-}
+front::~front() {}
 
 
 front::front() {
