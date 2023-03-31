@@ -8,6 +8,8 @@ class Bishop : public IPiece  {
 
         int move(Board&);                                       // To override in each piece class
         void checkMoves( Board& );
+
+        inline int* getPossibleMoves() { return possibleMoves; }
     private:
         const int allowedMoves[4] = {-9, -7, 9, 7};
         int possibleMoves[16];

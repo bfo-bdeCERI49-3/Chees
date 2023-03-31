@@ -5,13 +5,22 @@
 #include "board.h"
 #include "pawns/rook.hpp"
 #include "pawns/knight.hpp"
-#include "pawns/fool.hpp"
+#include "pawns/bishop.hpp"
 #include "pawns/queen.hpp"
 #include "pawns/king.hpp"
 #include "pawns/pawn.hpp"
 
+Board::~Board(){
+    for (size_t i = 0; i < 64; i++) {
+        if ( cases[i].m_pawn != nullptr ) {
+            delete cases[i].m_pawn;
+        }
+    }
+    delete[] cases;
+}
 
 Board::Board() {
+
     cases = new Case[64];
 
     for (size_t i = 0; i < 64; i++) {
@@ -28,10 +37,10 @@ Board::Board() {
             cases[i].m_pawn = new Knight(Black, i);
             cases[i].type = KNIGHT; 
         }else if (i == 2 || i == 5) {
-            cases[i].m_pawn = new Fool(White, i);
+            cases[i].m_pawn = new Bishop(White, i);
             cases[i].type = FOOL; 
         } else if (i == 58 || i == 61) {
-            cases[i].m_pawn = new Fool(Black, i);
+            cases[i].m_pawn = new Bishop(Black, i);
             cases[i].type = FOOL; 
         }else if (i == 3) {
             cases[i].m_pawn = new Queen(White, i);

@@ -16,5 +16,10 @@ struct Case {
 class Board {
     public:
         Board();
+        ~Board();
+        
         Case* cases;
+        private:
+            bool checkMates();
+            
 };

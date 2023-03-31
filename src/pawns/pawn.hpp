@@ -9,6 +9,8 @@ class Pawn : public IPiece {
 
         int move( Board& );                                        // To override in each piece class
         void checkMoves( Board& );
+
+        inline int* getPossibleMoves() { return possibleMoves; }
     private: 
         bool first_move { true };
 

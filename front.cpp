@@ -29,11 +29,7 @@ void front::doInput() {
                         current_pos = i;
                     } else if ( current_pos != -1 ) {
                         if ( current_pos != i) {
-                            m_board.cases[i].type = m_board.cases[current_pos].type;
-                            m_board.cases[i].m_pawn = m_board.cases[current_pos].m_pawn;
-
-                            m_board.cases[current_pos].type = NOTHING;
-                            m_board.cases[current_pos].m_pawn = nullptr;
+                            int arr = m_board.cases[i].m_pawn->getPossibleMoves();
                         }
                         current_pos = -1;
                     }

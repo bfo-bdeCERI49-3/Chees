@@ -11,6 +11,8 @@ class Queen : public IPiece {
 
         int move(Board&);
         void checkMoves(Board&);                                         // To override in each piece class
+
+        inline int* getPossibleMoves() { return possibleMoves; }
     private:
         const int allowedMoves[30] = { -1, 1, -7, 7, 8, -8, -9, 9, };
         int possibleMoves[30];
