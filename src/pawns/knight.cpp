@@ -16,7 +16,7 @@ void Knight::checkMoves(Board &m_board)
         int next_pos = position + allowedMoves[i];
         if (next_pos >= 0 && next_pos <= 63)
         {
-            if ((next_pos + 1) % 8 == 0 || next_pos % 8 == 0)
+            if ((next_pos + 1) % 8 == 0 || next_pos % 8 == 0 || next_pos % 7 == 0)
             {
                 continue;
             }
@@ -35,7 +35,6 @@ void Knight::checkMoves(Board &m_board)
                     {
                         possibleMoves[allow_i] = next_pos;
                         allow_i++;
-                        break;
                     }
                 }
             }
@@ -46,13 +45,6 @@ void Knight::checkMoves(Board &m_board)
                 {
                     possibleMoves[allow_i] = next_pos;
                     allow_i++;
-                }
-                else
-                {
-                    if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == White)
-                    {
-                        break;
-                    }
                 }
             }
         }
