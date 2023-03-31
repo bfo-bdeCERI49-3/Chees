@@ -7,6 +7,16 @@ Pawn::Pawn( Color set_color, size_t set_position){
     position = set_position;
 }
 
+bool Pawn::isPossibleMove( int new_position ) {
+    checkMoves();
+    for ( int i = 0; i < 4; i++){
+        if ( possibleMoves[i] == new_position ) { 
+            return true;
+        }
+    }
+    return false;
+}
+
 int Pawn::move(Board &m_board)
 {
     int new_pos;

@@ -8,6 +8,16 @@ Rook::Rook(Color set_color, size_t set_position)
     position = set_position;
 }
 
+bool Pawn::isPossibleMove( int new_position ) {
+    checkMoves();
+    for ( int i = 0; i < 16; i++){
+        if ( possibleMoves[i] == new_position ) { 
+            return true;
+        }
+    }
+    return false;
+}
+
 void Rook::checkMoves(Board &m_board)
 {
     int allow_i = 0;

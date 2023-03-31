@@ -11,7 +11,7 @@ class King : public IPiece {
         int move(Board&);                                       // To override in each piece class
         void checkMoves( Board& );
 
-        inline int* getPossibleMoves() { return possibleMoves; }
+        bool isPossibleMove( int );
     private:
         const int allowedMoves[8] = {-1, -9, -8, -7, 1, 9, 8, 7};
         int possibleMoves[8];

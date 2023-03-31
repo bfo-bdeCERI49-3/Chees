@@ -7,6 +7,16 @@ Bishop::Bishop( Color set_color, size_t set_position ) {
     position = set_position;
 }
 
+bool Bishop::isPossibleMove( int new_position ) {
+    checkMoves();
+    for ( int i = 0; i < 16; i++){
+        if ( possibleMoves[i] == new_position ) { 
+            return true;
+        }
+    }
+    return false;
+}
+
 void Bishop::checkMoves( Board& m_board ) {
     int allow_i = 0;
     for ( int i = 0; i < 4; i++ ) {

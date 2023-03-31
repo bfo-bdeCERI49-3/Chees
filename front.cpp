@@ -29,7 +29,8 @@ void front::doInput() {
                         current_pos = i;
                     } else if ( current_pos != -1 ) {
                         if ( current_pos != i) {
-                            int arr = m_board.cases[i].m_pawn->getPossibleMoves();
+                            if m_board.cases[current_pos].m_pawn->isPossibleMoves(i);
+
                         }
                         current_pos = -1;
                     }
@@ -103,9 +104,7 @@ void front::clear() {
     SDL_RenderClear(renderer);
 }
 
-front::~front() {
-
-}
+front::~front() {}
 
 
 front::front() {
