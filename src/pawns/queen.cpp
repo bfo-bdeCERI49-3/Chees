@@ -1,5 +1,11 @@
 #include "queen.hpp"
 
+
+Queen::Queen(Color set_color ,size_t set_position) {
+    color =set_color;
+    position = set_position;
+}
+
 int Queen::move(Board &m_board)
 {
     int new_pos;
@@ -525,3 +531,4 @@ void Queen::checkMoves(Board &m_board)
         }
     }
 }
+

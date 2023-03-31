@@ -5,7 +5,10 @@
 class Queen : public IPiece {
     public:
         Queen ( Color, size_t );
-        ~Queen();
+
+    Queen();
+
+    ~Queen();
 
         int move(Board&);
         void checkMoves(Board&);                                         // To override in each piece class
