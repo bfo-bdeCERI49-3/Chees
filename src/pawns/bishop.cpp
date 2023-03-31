@@ -56,3 +56,4 @@ int Bishop::move( Board& m_board, int old_pos, int new_pos){
 
     position = new_pos;
 }
+
