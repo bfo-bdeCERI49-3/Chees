@@ -9,31 +9,32 @@ Rook::Rook( Color set_color, size_t set_position ) {
 
 void Rook::checkMoves(Board& m_board){
     int allow_i = 0;
+
+    bool vertical = true;
+    bool horizontal = true;
+
     for ( int i = 0; i < 14; i++ ) {
         int next_pos = position + allowedMoves[i];
 
-        if (next_pos >= 0 && next_pos <= 63 ) {
+        if ( vertical && next_pos >= 0 && next_pos <= 63 ) {
             if ( m_board.cases[next_pos].type == NOTHING ) {
                 possibleMoves[allow_i] = next_pos;
                 allow_i++;
             } else {
-                break;
+                vertical = false;
             }
         }
 
         next_pos = position - allowedMoves[i];
-
-        if (next_pos >= 0 && next_pos <= 63 ) {
+        if (horizontal && next_pos >= 0 && next_pos <= 63 ) {
             if ( m_board.cases[next_pos].type == NOTHING ) {
                 possibleMoves[allow_i] = next_pos;
                 allow_i++;
             } else {
-                //Eat.
-                break;
+                horizontal = false;
             }
         }
     }
-
 
     for(int i = 0; i < 16; i++){
         std::cout << possibleMoves[i] << ";";

@@ -12,9 +12,20 @@ void Fool::checkMoves( Board& m_board ) {
     for ( int i = 0; i < 4; i++ ) {
         int next_pos = position;
         while ( next_pos + allowedMoves[i] >= 0 && next_pos  + allowedMoves[i] < 64) {
-            if ( (next_pos + 1) % 8 == 0 || next_pos%8 == 0) {
+            if ( (next_pos + 1) % 8 == 0 || next_pos%8 == 0 ) {
                 break;
             }
+            
+            Case current_case = m_board.cases[next_pos  + allowedMoves[i]];
+            if(current_case.type != NOTHING) {
+                if ( current_case.m_pawn != nullptr ) {
+                    if ( color !=  current_case.m_pawn->getColor() ) {
+                        possibleMoves[allow_i] = next_pos + allowedMoves[i];
+                    }
+                }
+                break;
+            }
+
             possibleMoves[allow_i] = next_pos + allowedMoves[i];
             next_pos += allowedMoves[i];
             allow_i++;
