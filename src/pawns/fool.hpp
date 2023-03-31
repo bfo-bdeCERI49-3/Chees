@@ -5,6 +5,7 @@ class Fool : public IPiece  {
     public:
         Fool( Color, size_t );
         ~Fool();
+
         int move(Board&);                                       // To override in each piece class
         void checkMoves( Board& );
     private:
