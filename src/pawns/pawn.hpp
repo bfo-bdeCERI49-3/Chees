@@ -16,6 +16,6 @@ class Pawn : public IPiece {
         bool first_move { true };
 
         const int allowedMoves[4] = { 7, 8, 9, 16 };
-        int possibleMoves[4];                                    // En Passant, First move;
+        int possibleMoves[10];                                    // En Passant, First move;
         int possibleMovesSize = 0;
 };

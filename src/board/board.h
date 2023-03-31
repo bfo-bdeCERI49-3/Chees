@@ -1,10 +1,3 @@
-//
-// Created by Notoverflow on 3/30/23.
-//
-
-
-
-
 #pragma once
 #include "pawns/IPiece.hpp"
 
@@ -20,6 +13,7 @@ class Board {
         
         Case* cases;
         private:
+            bool check();
             bool checkMates();
             
 };

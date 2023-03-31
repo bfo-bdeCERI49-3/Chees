@@ -31,19 +31,20 @@ void Queen::checkMoves(Board &m_board)
 {
     int allow_i = 0;
     for ( int i = 0; i < 4; i++ ) {
-        int next_pos = position;
-        while ( next_pos + allowedMovesBishop[i] >= 0 && next_pos  + allowedMovesBishop[i] < 64) {
+        int next_pos = position  + allowedMovesBishop[i];
+        while ( next_pos>= 0 && next_pos  < 64) {
 
-            Case current_case = m_board.cases[next_pos  + allowedMovesBishop[i]];
-            if(current_case.type != NOTHING) {
+            Case current_case = m_board.cases[next_pos];
+            if(current_case.type != NOTHING ) {
                 if ( current_case.m_pawn != nullptr ) {
-                    if ( color !=  current_case.m_pawn->getColor() ) {
-                        possibleMoves[allow_i] = next_pos + allowedMovesBishop[i];
+                    if(  m_board.cases[next_pos].m_pawn->getColor() != color ) {
+                        possibleMoves[allow_i] = next_pos;
+                        allow_i++;
                     }
                 }
                 break;
             }
-            possibleMoves[allow_i] = next_pos + allowedMovesBishop[i];
+            possibleMoves[allow_i] = next_pos;
             next_pos += allowedMovesBishop[i];
             allow_i++;
         }
@@ -65,6 +66,10 @@ void Queen::checkMoves(Board &m_board)
             }
             else
             {
+                if(  m_board.cases[next_pos].m_pawn->getColor() != color ) {
+                    possibleMoves[allow_i] = next_pos;
+                    allow_i++;
+                }
                 vertical = false;
             }
         }
@@ -79,22 +84,11 @@ void Queen::checkMoves(Board &m_board)
             }
             else
             {
-                horizontal = false;
-            }
-            if (this->color == White)
-            {
-
-                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == Black)
-                {
+                if(  m_board.cases[next_pos].m_pawn->getColor() != color ) {
                     possibleMoves[allow_i] = next_pos;
                     allow_i++;
-                    break;
                 }
-            }
-            else
-            {
-                if (m_board.cases[next_pos].type != NOTHING && m_board.cases[next_pos].m_pawn->getColor() == White)
-                    break;
+                horizontal = false;
             }
         }
     }

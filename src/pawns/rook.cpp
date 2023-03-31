@@ -31,10 +31,6 @@ void Rook::checkMoves(Board &m_board)
     {
         int next_pos = position + allowedMoves[i];
 
-        // A enlever en cas de bug, peut causer des soucis dans la logique
-        if(next_pos % 8 == 0 || next_pos % 7 == 0)
-            continue;
-
         if (vertical && next_pos >= 0 && next_pos <= 63)
         {
             if (m_board.cases[next_pos].type == NOTHING)
@@ -44,6 +40,10 @@ void Rook::checkMoves(Board &m_board)
             }
             else
             {
+                if(  m_board.cases[next_pos].type != KING || m_board.cases[next_pos].m_pawn->getColor() != color ) {
+                    possibleMoves[allow_i] = next_pos;
+                    allow_i++;
+                }
                 vertical = false;
             }
         }
@@ -58,6 +58,10 @@ void Rook::checkMoves(Board &m_board)
             }
             else
             {
+                if(  m_board.cases[next_pos].type != KING || m_board.cases[next_pos].m_pawn->getColor() != color ) {
+                    possibleMoves[allow_i] = next_pos;
+                    allow_i++;
+                }
                 horizontal = false;
             }
         }
