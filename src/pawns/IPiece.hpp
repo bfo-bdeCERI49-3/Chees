@@ -30,7 +30,7 @@ class IPiece {
         void checkMoves( Board& );
 
         int getColor() { return color; }
-        virtual int* getPossibleMoves() = 0;
+        virtual bool isPossibleMove( int ) = 0;
     protected:
         Color   color { White };        // Color of the piece
         bool    taken { false };        // True the piece was taken
