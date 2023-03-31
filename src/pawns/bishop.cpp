@@ -1,13 +1,13 @@
-#include "pawns/fool.hpp"
+#include "pawns/bishop.hpp"
 #include "board/board.h"
 #include <iostream>
 
-Fool::Fool( Color set_color, size_t set_position ) {
+Bishop::Bishop( Color set_color, size_t set_position ) {
     color = set_color;
     position = set_position;
 }
 
-void Fool::checkMoves( Board& m_board ) {
+void Bishop::checkMoves( Board& m_board ) {
     int allow_i = 0;
     for ( int i = 0; i < 4; i++ ) {
         int next_pos = position;
@@ -39,7 +39,7 @@ void Fool::checkMoves( Board& m_board ) {
 
 }
 
-int Fool::move(Board &m_board) {
+int Bishop::move(Board &m_board) {
     int new_pos = position;
     return new_pos;
 }

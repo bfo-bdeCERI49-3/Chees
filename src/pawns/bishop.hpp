@@ -1,10 +1,10 @@
 #pragma once 
 #include "pawns/IPiece.hpp"
 
-class Fool : public IPiece  {
+class Bishop : public IPiece  {
     public:
-        Fool( Color, size_t );
-        ~Fool();
+        Bishop( Color, size_t );
+        ~Bishop();
 
         int move(Board&);                                       // To override in each piece class
         void checkMoves( Board& );
