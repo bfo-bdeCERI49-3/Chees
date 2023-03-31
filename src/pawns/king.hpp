@@ -5,11 +5,8 @@
 
 class King : public IPiece {
     public:
-        int move();             // To override in each piece class
-        void checkMoves(board &board);
+        King ( Color, size_t );
+        ~King();
 
-
-    private:
-        const int allowedMoves[8] = { 1, 8, -8, 7, -7, 9, -9 };     // Allowed moves as King
-        int possibleMoves[8];                                           // 
+        int move(Board&);                                        // To override in each piece class
 };

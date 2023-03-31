@@ -12,39 +12,47 @@
 
 
 Board::Board() {
-    for (int i = 0; i < 64; i++) {
-        cases[i] = new Case();
+    cases = new Case[64];
+
+    for (size_t i = 0; i < 64; i++) {
         if (i == 0 || i == 7) {
-
-            cases[i]->m_pawn = new Rook(White);
+            cases[i].m_pawn = new Rook(White, i);
+            cases[i].type = ROOK; 
         } else if (i == 56 || i == 63) {
-            cases[i]->m_pawn = new Rook(Black);
+            cases[i].m_pawn = new Rook(Black, i);
+            cases[i].type = ROOK; 
         } else if (i == 1 || i == 6) {
-            cases[i]->m_pawn = new Knight(White);
+            cases[i].m_pawn = new Knight(White, i);
+            cases[i].type = KNIGHT; 
         } else if (i == 57 || i == 62) {
-            cases[i]->m_pawn = new Knight(Black);
+            cases[i].m_pawn = new Knight(Black, i);
+            cases[i].type = KNIGHT; 
         }else if (i == 2 || i == 5) {
-            cases[i]->m_pawn = new Fool(White);
+            cases[i].m_pawn = new Fool(White, i);
+            cases[i].type = FOOL; 
         } else if (i == 58 || i == 61) {
-            cases[i]->m_pawn = new Fool(Black);
+            cases[i].m_pawn = new Fool(Black, i);
+            cases[i].type = FOOL; 
         }else if (i == 3) {
-            cases[i]->m_pawn = new Queen(White);
+            cases[i].m_pawn = new Queen(White, i);
+            cases[i].type = QUEEN; 
         } else if (i == 59) {
-            cases[i]->m_pawn = new Queen(Black);
+            cases[i].m_pawn = new Queen(Black, i);
+            cases[i].type = QUEEN; 
         }else if (i == 4) {
-            cases[i]->m_pawn = new King(White);
+            cases[i].m_pawn = new King(White, i);
+            cases[i].type = KING; 
         } else if (i == 60) {
-            cases[i]->m_pawn = new King(Black);
+            cases[i].m_pawn = new King(Black, i);
+            cases[i].type = KING;
         }else if (i >= 8 && i <= 15) {
-            cases[i]->m_pawn = new Pawn(White);
+            cases[i].m_pawn = new Pawn(White, i);
+            cases[i].type = PAWN;
         } else if (i >= 48 && i <= 55) {
-            cases[i]->m_pawn = new Pawn(Black);
+            cases[i].m_pawn = new Pawn(Black, i);
+            cases[i].type = PAWN;
         }else {
-            cases[i]->m_pawn = nullptr;
+            cases[i].m_pawn = nullptr;
         }
-
-
     }
-
-
 }
