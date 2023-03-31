@@ -9,7 +9,7 @@ class Queen : public IPiece {
 
     ~Queen();
 
-        int move(Board&);
+        int move( Board&, int , int );
         void checkMoves(Board&);                                         // To override in each piece class
 
         bool isPossibleMoves( Board&, int );

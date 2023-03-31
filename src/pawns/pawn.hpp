@@ -7,7 +7,7 @@ class Pawn : public IPiece {
         Pawn ( Color, size_t );
         ~Pawn();
 
-        int move( Board& );                                        // To override in each piece class
+        int move( Board&, int , int );                                       // To override in each piece class
         void checkMoves( Board& );
 
         bool isPossibleMoves( Board&, int );

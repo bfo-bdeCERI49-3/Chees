@@ -6,7 +6,7 @@ class Rook : public IPiece {
         Rook( Color, size_t );
         ~Rook();
 
-        int move(Board&);                                   // To override in each piece class
+        int move( Board&, int , int );                                   // To override in each piece class
         void checkMoves(Board&);
 
         bool isPossibleMoves( Board&, int );

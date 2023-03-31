@@ -8,6 +8,15 @@ Knight::Knight(Color set_color, size_t set_position)
     position = set_position;
 }
 
+int Knight::move( Board& m_board, int old_pos, int new_pos){
+    m_board.cases[new_pos].m_pawn = m_board.cases[old_pos].m_pawn;
+    m_board.cases[new_pos].type = m_board.cases[old_pos].type;
+
+
+    m_board.cases[old_pos].m_pawn = nullptr;
+    m_board.cases[old_pos].type = NOTHING;
+}
+
 bool Knight::isPossibleMoves( Board& m_board,  int new_position ) {
     checkMoves(m_board);
     for ( int i = 0; i < 4; i++){

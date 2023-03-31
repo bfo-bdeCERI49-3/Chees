@@ -8,7 +8,7 @@ class King : public IPiece {
         King ( Color, size_t );
         ~King();
 
-        int move(Board&);                                       // To override in each piece class
+        int move( Board&, int , int );                                      // To override in each piece class
         void checkMoves( Board& );
 
         bool isPossibleMoves( Board&, int );

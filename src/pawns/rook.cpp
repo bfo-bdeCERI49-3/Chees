@@ -19,6 +19,15 @@ bool Rook::isPossibleMove( Board& m_board, int new_position ) {
     return false;
 }
 
+int Rook::move( Board& m_board, int old_pos, int new_pos){
+    m_board.cases[new_pos].m_pawn = m_board.cases[old_pos].m_pawn;
+    m_board.cases[new_pos].type = m_board.cases[old_pos].type;
+
+
+    m_board.cases[old_pos].m_pawn = nullptr;
+    m_board.cases[old_pos].type = NOTHING;
+}
+
 void Rook::checkMoves(Board &m_board)
 {
     int allow_i = 0;
