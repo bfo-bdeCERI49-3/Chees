@@ -11,14 +11,13 @@ enum Color {
 
 enum PieceType {
     NOTHING = 0,
-    QUEEN,
+    PAWN,
+    KNIGHT,
     FOOL,
     ROOK,
-    KNIGHT,
-    PAWN,
+    QUEEN,
     KING,
 };
-
 // Base Piece
 
 class IPiece {
@@ -26,10 +25,13 @@ class IPiece {
         
         inline bool isTaken() { return this->taken; };      // Check if the piece was taken or not 
         inline void setTaken() { this->taken = true; };        // Set the piece as taken
-        virtual int move( Board& ) = 0;                                         // To override in each piece class
+        virtual int move( Board&, int , int ) = 0;                                         // To override in each piece class
         void checkMoves( Board& );
 
         int getColor() { return color; }
+        virtual bool isPossibleMoves( Board&, int ) = 0;
+
+
     protected:
         Color   color { White };        // Color of the piece
         bool    taken { false };        // True the piece was taken

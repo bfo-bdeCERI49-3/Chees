@@ -10,8 +10,17 @@
 #include "pawns/king.hpp"
 #include "pawns/pawn.hpp"
 
+Board::~Board(){
+    for (size_t i = 0; i < 64; i++) {
+        if ( cases[i].m_pawn != nullptr ) {
+            delete cases[i].m_pawn;
+        }
+    }
+    delete[] cases;
+}
 
 Board::Board() {
+
     cases = new Case[64];
 
     for (size_t i = 0; i < 64; i++) {
